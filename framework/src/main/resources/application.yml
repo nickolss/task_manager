@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: framework
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/task_manager
+    username: user
+    password: password
+
+server:
+  port: 9999
