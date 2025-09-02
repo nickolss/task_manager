@@ -3,6 +3,7 @@ package com.nickolss.framework.adapter.web.controller;
 import com.nickolss.framework.adapter.web.dto.TaskRequestDto;
 import com.nickolss.framework.adapter.web.dto.TaskResponseDto;
 import com.nickolss.framework.useCase.TaskService;
+import jakarta.validation.Valid;
 import model.Task;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskResponseDto> createTask(@RequestBody TaskRequestDto request) {
+    public ResponseEntity<TaskResponseDto> createTask(@Valid @RequestBody TaskRequestDto request) {
         Task task = new Task(
                 request.name(),
                 request.description(),
@@ -74,7 +75,7 @@ public class TaskController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteTask(@RequestBody Task task) {
+    public ResponseEntity<Void> deleteTask(@Valid @RequestBody Task task) {
         taskService.deleteTask(task);
         return ResponseEntity.noContent().build();
     }

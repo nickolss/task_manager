@@ -3,6 +3,7 @@ package com.nickolss.framework.adapter.web.controller;
 import com.nickolss.framework.adapter.web.dto.SubjectRequestDto;
 import com.nickolss.framework.adapter.web.dto.SubjectResponseDto;
 import com.nickolss.framework.useCase.SubjectService;
+import jakarta.validation.Valid;
 import model.Subject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class SubjectController {
     }
 
     @PostMapping
-    public ResponseEntity<SubjectResponseDto> createSubject(@RequestBody SubjectRequestDto request) {
+    public ResponseEntity<SubjectResponseDto> createSubject(@Valid @RequestBody SubjectRequestDto request) {
         Subject subject = new Subject(
                 request.name(),
                 request.description()
@@ -66,7 +67,7 @@ public class SubjectController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteSubject(@RequestBody Subject subject) {
+    public ResponseEntity<Void> deleteSubject(@Valid @RequestBody Subject subject) {
         subjectService.deleteSubject(subject);
 
         return ResponseEntity.noContent().build();
