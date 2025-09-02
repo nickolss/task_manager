@@ -81,4 +81,27 @@ public class TaskEntity {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public TaskEntity(){
+
+    }
+
+    public TaskEntity(String name, String description, Date startDate, Date endDate) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.createAt = new Date();
+        this.updatedAt = new Date();
+    }
+
+    public TaskEntity(UUID id, String name, String description, Date startDate, Date endDate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.createAt = new Date();
+        this.updatedAt = new Date();
+    }
 }

@@ -28,6 +28,13 @@
 		</dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- DOMAIN -->
+
+        <dependency>
             <groupId>com.nickolss</groupId>
             <artifactId>domain</artifactId>
             <version>1.0-SNAPSHOT</version>

@@ -1,6 +1,7 @@
 package com.nickolss.framework.adapter.repository.entity;
 
 import jakarta.persistence.*;
+
 import java.util.UUID;
 
 @Entity
@@ -32,6 +33,15 @@ public class SubjectEntity {
     }
 
     public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public SubjectEntity() {
+
+    }
+
+    public SubjectEntity(String name, String description) {
+        this.name = name;
         this.description = description;
     }
 }
