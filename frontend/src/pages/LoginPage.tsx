@@ -17,15 +17,19 @@ const LoginPage = () => {
 
     const navigation = useNavigate();
 
-    const handleLogin = (data: LoginFormInputs) => {
+    const handleLogin = async (data: LoginFormInputs) => {
         try {
             const loginData: LoginData = {
                 email: data.email,
                 password: data.password,
             }
 
-            loginUser(loginData);
-            navigation("/");
+            const {error} = await loginUser(loginData);
+            if (error) {
+                alert(error.message);
+            } else {
+                navigation("/");
+            }
         } catch (error) {
             console.error('Login error:', error);
         }

@@ -17,7 +17,7 @@ const RegisterPage = () => {
 
     const navigation = useNavigate();
 
-    const handleRegister = (data: RegisterFormInputs) => {
+    const handleRegister = async (data: RegisterFormInputs) => {
         try {
             const registerData: RegisterData = {
                 fullName: data.name,
@@ -25,8 +25,12 @@ const RegisterPage = () => {
                 password: data.password,
                 confirmPassword: data.confirmPassword,
             };
-            registerUser(registerData);
-            navigation("/login");
+            const { error } = await registerUser(registerData);
+            if (error) {
+                throw error;
+            } else {
+                navigation("/login");
+            }
         } catch (error) {
             console.error('Registration error:', error);
         }
