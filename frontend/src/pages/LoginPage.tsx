@@ -1,10 +1,21 @@
-import { Box, Button, Field, Heading, Input, Stack, Text } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Field,
+    Heading,
+    Input,
+    Spinner,
+    Stack,
+    Text,
+} from '@chakra-ui/react';
+import { Toaster, toaster } from "@/components/ui/toaster"
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema, type LoginFormInputs } from '@/validation/LoginPage.schema';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import type { LoginData } from '@/types/authType';
 import { loginUser } from '@/services/authService';
+import { useState } from 'react';
 
 const LoginPage = () => {
     const {
@@ -16,22 +27,45 @@ const LoginPage = () => {
     });
 
     const navigation = useNavigate();
+    const [login, setLogin] = useState(false);
 
-    const handleLogin = async (data: LoginFormInputs) => {
+    const handleLogin = async (loginFormData: LoginFormInputs) => {
         try {
+            setLogin(true);
             const loginData: LoginData = {
-                email: data.email,
-                password: data.password,
-            }
+                email: loginFormData.email,
+                password: loginFormData.password,
+            };
 
-            const {error} = await loginUser(loginData);
+            const { error } = await loginUser(loginData);
+
             if (error) {
-                alert(error.message);
+                setLogin(false);
+                toaster.create({
+                    title: 'Login failed',
+                    description: 'Invalid email or password. Please try again.',
+                    duration: 4000,
+                    type: 'error',
+                });
             } else {
-                navigation("/");
+                setLogin(false);
+                toaster.create({
+                    title: 'Login successful',
+                    description: 'Welcome back!',
+                    duration: 3000,
+                    type: 'success',
+                });
+                navigation('/');
             }
         } catch (error) {
             console.error('Login error:', error);
+            setLogin(false);
+            toaster.create({
+                title: 'Unexpected error',
+                description: 'Something went wrong. Please try again later.',
+                duration: 5000,
+                type: 'error',
+            });
         }
     };
 
@@ -62,7 +96,9 @@ const LoginPage = () => {
                     type="submit"
                     colorScheme="blue"
                 >
-                    Sign in
+                    {login ? (
+                        <Spinner />
+                    ) : "Login"}
                 </Button>
 
                 <Text>
@@ -72,6 +108,7 @@ const LoginPage = () => {
                     </RouterLink>
                 </Text>
             </Stack>
+            <Toaster />
         </Box>
     );
 };
