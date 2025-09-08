@@ -2,7 +2,9 @@ import { Box, Button, Field, Heading, Input, Stack, Text } from '@chakra-ui/reac
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema, type RegisterFormInputs } from '@/validation/RegisterPage.schema';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { registerUser } from '@/services/authService';
+import type { RegisterData } from '@/types/authType';
 
 const RegisterPage = () => {
     const {
@@ -13,14 +15,21 @@ const RegisterPage = () => {
         resolver: yupResolver(registerSchema),
     });
 
+    const navigation = useNavigate();
+
     const handleRegister = (data: RegisterFormInputs) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const { ...submissionData } = data;
-                console.log('Registration Data:', submissionData);
-                resolve(true);
-            }, 2000);
-        });
+        try {
+            const registerData: RegisterData = {
+                fullName: data.name,
+                email: data.email,
+                password: data.password,
+                confirmPassword: data.confirmPassword,
+            };
+            registerUser(registerData);
+            navigation("/login");
+        } catch (error) {
+            console.error('Registration error:', error);
+        }
     };
 
     return (

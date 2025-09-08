@@ -2,7 +2,9 @@ import { Box, Button, Field, Heading, Input, Stack, Text } from '@chakra-ui/reac
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema, type LoginFormInputs } from '@/validation/LoginPage.schema';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import type { LoginData } from '@/types/authType';
+import { loginUser } from '@/services/authService';
 
 const LoginPage = () => {
     const {
@@ -13,13 +15,20 @@ const LoginPage = () => {
         resolver: yupResolver(loginSchema),
     });
 
+    const navigation = useNavigate();
+
     const handleLogin = (data: LoginFormInputs) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                console.log('Dados do formulário (validados com Yup):', data);
-                resolve(true);
-            }, 2000);
-        });
+        try {
+            const loginData: LoginData = {
+                email: data.email,
+                password: data.password,
+            }
+
+            loginUser(loginData);
+            navigation("/");
+        } catch (error) {
+            console.error('Login error:', error);
+        }
     };
 
     return (
