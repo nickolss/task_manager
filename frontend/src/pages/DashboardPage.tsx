@@ -14,7 +14,7 @@ const DashboardPage = () => {
         <Header title="Dashboard" />
         <Box p={"20px"} display={"flex"} flexDirection={"column"} gap={"20px"}>
 
-          <Heading size={"4xl"}>Overview</Heading>
+          <Heading as={"h1"} size={"4xl"}>Overview</Heading>
 
           <TabsDashboard />
         </Box>
