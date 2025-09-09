@@ -1,17 +1,38 @@
-import { Box, Link, Heading } from "@chakra-ui/react";
+import { Box, Heading, VStack } from '@chakra-ui/react';
+import { LuLayoutDashboard, LuSquareCheck, LuSettings } from 'react-icons/lu';
+import NavLink from './NavLink';
+
+const navItems = [
+    { href: '/', icon: LuLayoutDashboard, label: 'Dashboard' },
+    { href: '/tasks', icon: LuSquareCheck, label: 'Tasks' },
+    { href: '/settings', icon: LuSettings, label: 'Settings' },
+];
 
 const Sidebar = () => {
-    return(
-        <Box as={"aside"} bg={"gray"} padding={"10px"} w={"200px"} h={"100dvh"}>
-            <Heading size={"xl"}>Task Manager</Heading>
+    return (
+        <Box
+            as="aside"
+            bg="bg.surface"
+            w="250px"
+            minH="100vh"
+            borderRightWidth="1px"
+            borderColor="border.default"
+            p={4}
+        >
+            <Heading size="lg" mb={8}>
+                Task Manager
+            </Heading>
 
-            <Box as={"ul"} display={"flex"} flexDirection={"column"} gap={"10px"} marginTop={"20px"}>
-                <Link href="/">Home</Link>
-                <Link href="/tasks">Tasks</Link>
-                <Link href="/settings">Settings</Link>
-            </Box>
+            <VStack as="nav" align="stretch">
+                {navItems.map((item) => (
+                    <NavLink key={item.label} to={item.href}>
+                        <item.icon style={{ marginRight: '12px' }} />
+                        {item.label}
+                    </NavLink>
+                ))}
+            </VStack>
         </Box>
-    )
-}
+    );
+};
 
 export default Sidebar;
