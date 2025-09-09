@@ -40,8 +40,8 @@ const BarChart = () => {
         datasets: [
             {
                 label: 'Tasks',
-                data: [12, 19, 8, 15, 10, 5, 7], // Dados mockados
-                backgroundColor: 'rgba(54, 162, 235, 0.6)', // Cor azul
+                data: [12, 19, 8, 15, 10, 5, 7],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
             },
