@@ -1,5 +1,28 @@
-const DashboardPage = () => {
-  return <div>Dashboard Page</div>;
-};
+import Header from "@/components/layout/Header"
+import Sidebar from "@/components/layout/Sidebar"
+import TabsDashboard from "@/components/layout/TabsDashboard"
+import { Box, Heading } from "@chakra-ui/react"
 
-export default DashboardPage;
+
+const DashboardPage = () => {
+
+  return (
+
+    <Box display={"flex"}>
+      <Sidebar />
+      <Box flexGrow={1}>
+        <Header title="Dashboard" />
+        <Box p={"20px"} display={"flex"} flexDirection={"column"} gap={"20px"}>
+
+          <Heading size={"4xl"}>Overview</Heading>
+
+          <TabsDashboard />
+        </Box>
+
+      </Box>
+    </Box>
+
+  )
+}
+
+export default DashboardPage
