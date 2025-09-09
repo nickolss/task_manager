@@ -1,23 +1,31 @@
-import { Avatar, Box, Heading, Menu, Portal } from "@chakra-ui/react"
+import { Avatar, Box, Heading, Menu, Portal } from '@chakra-ui/react';
 
 type HeaderProps = {
-  title: string
-}
+  title: string;
+};
 
-const Header = (
-  { title }: HeaderProps
-) => {
+const Header = ({ title }: HeaderProps) => {
   return (
-    <Box as={"header"} bg={"red"} padding={"10px"} w={"100%"} h={"60px"} display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-      <Heading>
+    <Box
+      as="header"
+      bg="bg.surface"
+      borderBottomWidth="1px"
+      borderColor="border.default"
+      px={6}
+      h="60px"
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Heading as="h2" size="lg" color="text.primary">
         {title}
       </Heading>
 
-      <Menu.Root positioning={{ placement: "bottom" }}>
-        <Menu.Trigger rounded="full" focusRing="outside">
+      <Menu.Root positioning={{ placement: 'bottom-end' }}>
+        <Menu.Trigger>
           <Avatar.Root size="sm">
-            <Avatar.Fallback name="Segun Adebayo" />
-            <Avatar.Image src="https://bit.ly/sage-adebayo" />
+            <Avatar.Image src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />
+            <Avatar.Fallback>SA</Avatar.Fallback>
           </Avatar.Root>
         </Menu.Trigger>
         <Portal>
@@ -25,13 +33,16 @@ const Header = (
             <Menu.Content>
               <Menu.Item value="account">Account</Menu.Item>
               <Menu.Item value="settings">Settings</Menu.Item>
-              <Menu.Item value="logout">Logout</Menu.Item>
+              <Menu.Separator />
+              <Menu.Item value="logout" color="red.500">
+                Logout
+              </Menu.Item>
             </Menu.Content>
           </Menu.Positioner>
         </Portal>
       </Menu.Root>
     </Box>
-  )
-}
+  );
+};
 
 export default Header;
