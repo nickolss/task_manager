@@ -1,49 +1,54 @@
-import { Bar, BarChart as BarGraph, CartesianGrid, XAxis, YAxis } from "recharts"
-import { Chart, useChart } from "@chakra-ui/charts"
+import {
+    BarElement,
+    CategoryScale,
+    Chart as ChartJS,
+    Legend,
+    LinearScale,
+    Title,
+    Tooltip,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 
-interface DataPoint {
-    [key: string]: string | number
-}
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
-interface Series {
-    name: string
-    color: string
-}
+const BarChart = () => {
+    const options = {
+        responsive: true, 
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top' as const,
+            },
+            title: {
+                display: true,
+                text: 'Weekly Tasks Completed',
+            },
+        },
+    };
 
-interface BarChartProps {
-    data: DataPoint[]
-    series: Series[]
-    xKey: string
-}
+    const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const BarChart = ({ data, series, xKey }: BarChartProps) => {
-    const chart = useChart({
-        data,
-        series,
-    })
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Tasks',
+                data: [12, 19, 8, 15, 10, 5, 7], // Dados mockados
+                backgroundColor: 'rgba(54, 162, 235, 0.6)', // Cor azul
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+            },
+        ],
+    };
 
-    return (
-        <Chart.Root maxH="sm" chart={chart}>
-            <BarGraph data={chart.data}>
-                <CartesianGrid stroke={chart.color("border.muted")} vertical={false} />
-                <XAxis axisLine={false} tickLine={false} dataKey={chart.key(xKey)} />
-                <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    domain={[0, 100]}
-                    tickFormatter={(value) => `${value}%`}
-                />
-                {chart.series.map((item) => (
-                    <Bar
-                        key={item.name}
-                        isAnimationActive={false}
-                        dataKey={chart.key(item.name)}
-                        fill={chart.color(item.color)}
-                    />
-                ))}
-            </BarGraph>
-        </Chart.Root>
-    )
-}
+    return <Bar options={options} data={data} />;
+};
 
-export default BarChart
+export default BarChart;
