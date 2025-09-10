@@ -1,4 +1,5 @@
-import { Avatar, Box, Heading, Menu, Portal } from '@chakra-ui/react';
+import { Avatar, Box, Heading, HStack, Menu, Portal } from '@chakra-ui/react';
+import { ColorModeButton } from '@/components/ui/color-mode';
 
 type HeaderProps = {
   title: string;
@@ -21,26 +22,29 @@ const Header = ({ title }: HeaderProps) => {
         {title}
       </Heading>
 
-      <Menu.Root positioning={{ placement: 'bottom-end' }}>
-        <Menu.Trigger>
-          <Avatar.Root size="sm">
-            <Avatar.Image src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />
-            <Avatar.Fallback>SA</Avatar.Fallback>
-          </Avatar.Root>
-        </Menu.Trigger>
-        <Portal>
-          <Menu.Positioner>
-            <Menu.Content>
-              <Menu.Item value="account">Account</Menu.Item>
-              <Menu.Item value="settings">Settings</Menu.Item>
-              <Menu.Separator />
-              <Menu.Item value="logout" color="red.500">
-                Logout
-              </Menu.Item>
-            </Menu.Content>
-          </Menu.Positioner>
-        </Portal>
-      </Menu.Root>
+      <HStack>
+        <ColorModeButton />
+        <Menu.Root positioning={{ placement: 'bottom-end' }}>
+          <Menu.Trigger>
+            <Avatar.Root size="sm">
+              <Avatar.Image src="https://bit.ly/sage-adebayo" alt="Segun Adebayo" />
+              <Avatar.Fallback>SA</Avatar.Fallback>
+            </Avatar.Root>
+          </Menu.Trigger>
+          <Portal>
+            <Menu.Positioner>
+              <Menu.Content bg="bg.surface" borderColor="border.default">
+                <Menu.Item value="account">Account</Menu.Item>
+                <Menu.Item value="settings">Settings</Menu.Item>
+                <Menu.Separator borderColor="border.default" />
+                <Menu.Item value="logout" color="red.500">
+                  Logout
+                </Menu.Item>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Portal>
+        </Menu.Root>
+      </HStack>
     </Box>
   );
 };
