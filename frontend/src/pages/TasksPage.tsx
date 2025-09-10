@@ -94,7 +94,7 @@ const TasksPage = () => {
                                                         Task Title
                                                         <Field.RequiredIndicator />
                                                     </Field.Label>
-                                                    <Input placeholder="Write a text about..." {...register('title')} />
+                                                    <Input placeholder="Write a text about..." {...register('title')} borderColor="border.default" />
                                                     {errors.title && <Field.ErrorText>{errors.title.message}</Field.ErrorText>}
                                                 </Field.Root>
 
@@ -103,7 +103,7 @@ const TasksPage = () => {
                                                         Subject
                                                         <Field.RequiredIndicator />
                                                     </Field.Label>
-                                                    <Input placeholder="Literature" {...register('subject')} />
+                                                    <Input placeholder="Literature" {...register('subject')} borderColor="border.default" />
                                                     {errors.subject && <Field.ErrorText>{errors.subject.message}</Field.ErrorText>}
                                                 </Field.Root>
 
@@ -113,7 +113,7 @@ const TasksPage = () => {
                                                         <Field.RequiredIndicator />
                                                     </Field.Label>
                                                     <NativeSelect.Root>
-                                                        <NativeSelect.Field {...register('status')}>
+                                                        <NativeSelect.Field {...register('status')} borderColor="border.default">
                                                             <option value="Pending">Pending</option>
                                                             <option value="In Progress">In Progress</option>
                                                             <option value="Completed">Completed</option>
@@ -129,7 +129,7 @@ const TasksPage = () => {
                                                         <Field.RequiredIndicator />
                                                     </Field.Label>
                                                     <NativeSelect.Root>
-                                                        <NativeSelect.Field {...register('priority')}>
+                                                        <NativeSelect.Field {...register('priority')} borderColor="border.default">
                                                             <option value="Low">Low</option>
                                                             <option value="Medium">Medium</option>
                                                             <option value="High">High</option>
