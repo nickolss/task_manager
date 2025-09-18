@@ -2,6 +2,7 @@ package com.nickolss.framework.adapter.repository.entity;
 
 import jakarta.persistence.*;
 import model.Subject;
+import model.TaskStatus;
 import org.springframework.data.annotation.CreatedDate;
 import java.util.Date;
 import java.util.UUID;
@@ -17,6 +18,10 @@ public class TaskEntity {
 
     @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status = TaskStatus.PENDING;
 
     @JoinColumn(name = "subject_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -53,6 +58,22 @@ public class TaskEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public SubjectEntity getSubject() {
+        return subject;
+    }
+
+    public void setSubject(SubjectEntity subject) {
+        this.subject = subject;
     }
 
     public Date getStartDate() {

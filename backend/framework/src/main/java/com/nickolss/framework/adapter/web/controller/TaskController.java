@@ -45,6 +45,8 @@ public class TaskController {
                 createdTask.getId(),
                 createdTask.getName(),
                 createdTask.getDescription(),
+                createdTask.getStatus(),
+                subject.getId(),
                 createdTask.getStartDate(),
                 createdTask.getEndDate()
         );
@@ -62,6 +64,8 @@ public class TaskController {
                 task.getId(),
                 task.getName(),
                 task.getDescription(),
+                task.getStatus(),
+                task.getSubject().getId(),
                 task.getStartDate(),
                 task.getEndDate()
         )).toList();
@@ -79,6 +83,8 @@ public class TaskController {
                 task.getId(),
                 task.getName(),
                 task.getDescription(),
+                task.getStatus(),
+                task.getSubject().getId(),
                 task.getStartDate(),
                 task.getEndDate()
         );

@@ -65,11 +65,17 @@ public class TaskService implements TaskInterface {
                         entity.getId(),
                         entity.getName(),
                         entity.getDescription(),
+                        new Subject(
+                                entity.getSubject().getId(),
+                                entity.getSubject().getName(),
+                                entity.getSubject().getDescription()
+                        ),
                         entity.getStartDate(),
                         entity.getEndDate()
                 ))
                 .toList();
     }
+
 
     @Override
     public Task getTaskById(UUID id) {
@@ -78,6 +84,11 @@ public class TaskService implements TaskInterface {
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
+                new Subject(
+                        entity.getSubject().getId(),
+                        entity.getSubject().getName(),
+                        entity.getSubject().getDescription()
+                ),
                 entity.getStartDate(),
                 entity.getEndDate()
         );

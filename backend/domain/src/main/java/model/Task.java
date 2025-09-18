@@ -7,6 +7,7 @@ public class Task {
     private UUID id;
     private String name;
     private String description;
+    private TaskStatus status;
     private Subject subject;
     private Date startDate;
     private Date endDate;
@@ -33,6 +34,14 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
     }
 
     public Subject getSubject() {
@@ -65,15 +74,18 @@ public class Task {
     public Task(String name, String description, Subject subject, Date startDate, Date endDate) {
         this.name = name;
         this.description = description;
+        this.status = TaskStatus.PENDING;
         this.subject = subject;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Task(UUID id, String name, String description, Date startDate, Date endDate) {
+    public Task(UUID id, String name, String description, Subject subject, Date startDate, Date endDate) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.status = TaskStatus.PENDING;
+        this.subject = subject;
         this.startDate = startDate;
         this.endDate = endDate;
     }
