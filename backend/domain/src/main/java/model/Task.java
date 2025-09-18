@@ -7,6 +7,7 @@ public class Task {
     private UUID id;
     private String name;
     private String description;
+    private Subject subject;
     private Date startDate;
     private Date endDate;
 
@@ -34,6 +35,14 @@ public class Task {
         this.description = description;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
@@ -53,9 +62,10 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, String description, Date startDate, Date endDate) {
+    public Task(String name, String description, Subject subject, Date startDate, Date endDate) {
         this.name = name;
         this.description = description;
+        this.subject = subject;
         this.startDate = startDate;
         this.endDate = endDate;
     }

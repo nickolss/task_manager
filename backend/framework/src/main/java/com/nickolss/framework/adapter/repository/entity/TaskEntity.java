@@ -1,6 +1,7 @@
 package com.nickolss.framework.adapter.repository.entity;
 
 import jakarta.persistence.*;
+import model.Subject;
 import org.springframework.data.annotation.CreatedDate;
 import java.util.Date;
 import java.util.UUID;
@@ -16,6 +17,10 @@ public class TaskEntity {
 
     @Column(nullable = false)
     private String description;
+
+    @JoinColumn(name = "subject_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private SubjectEntity subject;
 
     @Column(nullable = false)
     private Date startDate;
@@ -86,9 +91,10 @@ public class TaskEntity {
 
     }
 
-    public TaskEntity(String name, String description, Date startDate, Date endDate) {
+    public TaskEntity(String name, String description, SubjectEntity subjectEntity, Date startDate, Date endDate) {
         this.name = name;
         this.description = description;
+        this.subject = subjectEntity;
         this.startDate = startDate;
         this.endDate = endDate;
         this.createAt = new Date();

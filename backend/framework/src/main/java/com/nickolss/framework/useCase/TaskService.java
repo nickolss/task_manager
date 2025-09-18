@@ -1,7 +1,9 @@
 package com.nickolss.framework.useCase;
 
 import com.nickolss.framework.adapter.repository.TaskRepositoryJpa;
+import com.nickolss.framework.adapter.repository.entity.SubjectEntity;
 import com.nickolss.framework.adapter.repository.entity.TaskEntity;
+import model.Subject;
 import model.Task;
 import org.springframework.stereotype.Service;
 import service.TaskInterface;
@@ -11,16 +13,27 @@ import java.util.UUID;
 @Service
 public class TaskService implements TaskInterface {
     private final TaskRepositoryJpa taskRepository;
+    private final SubjectService subjectService;
 
-    public TaskService(TaskRepositoryJpa taskRepository) {
+    public TaskService(TaskRepositoryJpa taskRepository, SubjectService subjectService) {
         this.taskRepository = taskRepository;
+        this.subjectService = subjectService;
     }
 
     @Override
     public Task createTask(Task task) {
+        Subject subject = subjectService.getSubjectById(task.getSubject().getId());
+        SubjectEntity subjectEntity = new SubjectEntity(
+                subject.getId(),
+                subject.getName(),
+                subject.getDescription()
+        );
+
+
         TaskEntity entity = new TaskEntity(
                 task.getName(),
                 task.getDescription(),
+                subjectEntity,
                 task.getStartDate(),
                 task.getEndDate()
         );

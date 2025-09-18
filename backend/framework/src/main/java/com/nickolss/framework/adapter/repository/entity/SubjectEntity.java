@@ -20,6 +20,10 @@ public class SubjectEntity {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -41,6 +45,12 @@ public class SubjectEntity {
     }
 
     public SubjectEntity(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public SubjectEntity(UUID id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }

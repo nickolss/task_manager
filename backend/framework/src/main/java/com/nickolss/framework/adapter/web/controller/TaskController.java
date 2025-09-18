@@ -2,14 +2,15 @@ package com.nickolss.framework.adapter.web.controller;
 
 import com.nickolss.framework.adapter.web.dto.TaskRequestDto;
 import com.nickolss.framework.adapter.web.dto.TaskResponseDto;
+import com.nickolss.framework.useCase.SubjectService;
 import com.nickolss.framework.useCase.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import model.Subject;
 import model.Task;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -18,17 +19,22 @@ import java.util.UUID;
 @Tag(name = "Task Controller", description = "Endpoints for managing tasks")
 public class TaskController {
     private final TaskService taskService;
+    private final SubjectService subjectService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, SubjectService subjectService) {
         this.taskService = taskService;
+        this.subjectService = subjectService;
     }
 
     @PostMapping
     @Operation(summary = "Create a new task", description = "Create a new task with the provided details")
     public ResponseEntity<TaskResponseDto> createTask(@Valid @RequestBody TaskRequestDto request) {
+        Subject subject = subjectService.getSubjectById(request.subjectId());
+
         Task task = new Task(
                 request.name(),
                 request.description(),
+                subject,
                 request.startDate(),
                 request.endDate()
         );
